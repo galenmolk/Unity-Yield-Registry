@@ -3,22 +3,21 @@ using UnityEngine;
 
 public static class YieldRegistry
 {
-    public static WaitForEndOfFrame WaitForEndOfFrame => endOfFrame ??= new WaitForEndOfFrame();
+    public static WaitForEndOfFrame WaitForEndOfFrame { get; } = new WaitForEndOfFrame();
+    public static WaitForFixedUpdate waitForFixedUpdate { get; } = new WaitForFixedUpdate();
 
-    private static WaitForEndOfFrame endOfFrame;
-
-    private static readonly Dictionary<float, WaitForSeconds> yieldRegistry = new Dictionary<float, WaitForSeconds>();
+    private static readonly Dictionary<float, WaitForSeconds> timeIntervalRegistry = new Dictionary<float, WaitForSeconds>();
 
     public static WaitForSeconds WaitForSeconds(float seconds)
     {
-        yieldRegistry.TryGetValue(seconds, out WaitForSeconds yield); 
+        timeIntervalRegistry.TryGetValue(seconds, out WaitForSeconds yield); 
         return yield ?? RegisterNewYield(seconds);
     }
 
     private static WaitForSeconds RegisterNewYield(float seconds)
     {
         WaitForSeconds yield = new WaitForSeconds(seconds);
-        yieldRegistry.Add(seconds, yield);
+        timeIntervalRegistry.Add(seconds, yield);
         return yield;
     }
 }
