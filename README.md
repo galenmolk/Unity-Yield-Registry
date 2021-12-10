@@ -1,5 +1,5 @@
 # Unity Yield Registry
-Use this registry to cache your `YieldInstruction` objects, saving you on memory allocation and minimizing garbage collection.
+Use this registry to cache your `YieldInstruction` objects, saving you on memory allocation and minimizing your garbage collection.
 
 ---
 **Example Usages:**
