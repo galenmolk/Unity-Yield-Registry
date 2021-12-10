@@ -1,12 +1,22 @@
-# Unity-Yield-Registry
-A small yield instruction registry to optimize coroutines.
+# Unity Yield Registry
+Use this registry to cache your `YieldInstruction` objects, saving you on memory allocation and minimizing garbage collection.
 
-Usage
+---
+**Example Usages:**
 
+_WaitForSeconds_
 ```
-private IEnumerator DisplayLogo()
-{
-    yield return YieldRegistry.WaitForSeconds(2f);
-    DisplayLogo();
-}
+yield return YieldRegistry.WaitForSeconds(5f);
+```
+_WaitUntil_
+```
+yield return YieldRegistry.WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
+```
+_WaitForEndOfFrame_
+```
+yield return YieldRegistry.WaitForEndOfFrame;
+```
+_WaitForFixedUpdate_
+```
+yield return YieldRegistry.WaitForFixedUpdate;
 ```
