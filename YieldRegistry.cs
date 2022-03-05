@@ -22,17 +22,17 @@ public static class YieldRegistry
         return yield ?? RegisterNewWaitUntil(predicate);
     }
 
-    private static WaitUntil RegisterNewWaitUntil(Func<bool> predicate)
-    {
-        WaitUntil yield = new WaitUntil(predicate);
-        predicateRegistry.Add(predicate, yield);
-        return yield;
-    }
-
     private static WaitForSeconds RegisterNewWaitForSeconds(float seconds)
     {
         WaitForSeconds yield = new WaitForSeconds(seconds);
         timeIntervalRegistry.Add(seconds, yield);
+        return yield;
+    }
+    
+    private static WaitUntil RegisterNewWaitUntil(Func<bool> predicate)
+    {
+        WaitUntil yield = new WaitUntil(predicate);
+        predicateRegistry.Add(predicate, yield);
         return yield;
     }
 }
